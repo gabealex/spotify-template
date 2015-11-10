@@ -5,7 +5,7 @@
 	someone needing new music can use my site to put in a song they really like and find related songs/artists.
 
 2.	What is the URL of this project on your student web-server?
-http://students.washington.edu/gabalex/info343/spotify-template/index.html
+	http://students.washington.edu/gabalex/info343/spotify-template/index.html
 
 3.	Did you receive help from any other sources (classmates, etc.)? If so, please list who.
 	Someone in the TE lab helped me with iterating through my array. I didn't know how to call the object because it was 2 arrays but he

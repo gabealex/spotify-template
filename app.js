@@ -18,8 +18,8 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   //given the selected song, gets the related songs that match
   $scope.getSuggested = function(track) {
     $scope.chosenTrack = track;
-    var suggestedTracks = [];
-    var suggestedArtists = [];
+    var giveTracks = [];
+    var giveArtists = [];
 
     //gets the track selected
     $http.get(trackUrl + track.id).success(function(result) {
@@ -29,15 +29,15 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       $http.get(artistUrl + artist.id + '/related-artists').success(function(relateresult) {
         for (i = 0; i < 3; i++) {
           var related = relateresult.artists[i];
-          suggestedArtists.push(related);
+          giveArtists.push(related);
           //gets the top track of the respective artists
           $http.get(artistUrl + related.id + '/top-tracks?country=SE').success(function(trackresult) {
             var top = trackresult.tracks[0];
-            suggestedTracks.push(top);
+            giveTracks.push(top);
           })
         }
-        $scope.suggestedTracks = suggestedTracks;
-        $scope.suggestedArtists = suggestedArtists;
+        $scope.suggestedTracks = giveTracks;
+        $scope.suggestedArtists = giveArtists;
       })
     })
   }
@@ -65,7 +65,6 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   $scope.refresh = function() {
     $scope.hide = false;
   }
-
 })
 
 // Add tool tips to anything with a title property

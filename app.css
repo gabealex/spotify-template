@@ -29,3 +29,12 @@ img {
 .songdesc {
 	margin-left: 10px;
 }
+
+label {
+	font-size: 20px;
+}
+
+form {
+	padding: 0;
+}
+

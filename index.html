@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Rock out with your socks out</title>
+	<title>Rock out, Socks out</title>
 	
 	<!-- Include libraries -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
@@ -40,12 +40,15 @@
 		</form>
 		
 		<!-- Results -->
-		<div class="container" id="songresults" ng-hide="hide">
+		<div class="container" ng-hide="hide">
 			<p ng-show="tracks.length>0" class="help-block">We found a few songs that matched your input. Select the right groove!</p>
 			<p ng-show="tracks.length==0" class="help-block">You're too hipster. Give us something we can actually work with.</p>
 			<div id="matchingsongs" ng-repeat="track in tracks" class="col-sm-4 img">
-		        <div class="album-art" ng-click="play(track.preview_url); getSuggested(track); $parent.hide=true; show()" title='"{{track.name}}" by {{track.artists[0].name}}"'>
+		        <div class="album-art" ng-click="play(track.preview_url); getSuggested(track); show()" title='"{{track.name}}" by {{track.artists[0].name}}"'>
+		        	<a href="#results">
 		            <img src="{{track.album.images[1].url}}"></img>
+		       		</a>
+		       		<p>{{track.name}}" by {{track.artists[0].name}}</p>
 		        </div>
 	        </div>
 		</div>
@@ -54,7 +57,7 @@
 			<div id="songchoice">
 				<h1>PERFECT.</h1>
 				<p>"{{chosenTrack.name}}" By {{chosenArtist.name}}</p>
-				<div id="chosenSong" class="album-art" ng-click="play(chosenTrack.preview_url)">
+				<div class="album-art" ng-click="play(chosenTrack.preview_url)">
 	                <img src="{{chosenTrack.album.images[0].url}}"/>
 				</div>
 			</div>
