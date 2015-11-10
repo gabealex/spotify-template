@@ -53,8 +53,8 @@
 		<div id="results" class="container" ng-show="showartist">
 			<div id="songchoice">
 				<h1>PERFECT.</h1>
-				<p>"{{chosenTrack.name}}" by {{chosenArtist.name}}</p>
-				<div id="chosenSong" class="album-art" ng-click="play(chosenTrack.preview.url)" ng-class="chosenTrack.preview_url == current ? 'playing: ''">
+				<p>"{{chosenTrack.name}}" By {{chosenArtist.name}}</p>
+				<div id="chosenSong" class="album-art" ng-click="play(chosenTrack.preview.url)">
 	                <img src="{{chosenTrack.album.images[0].url}}"/>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 
 			<div id="related">
 				<div class="col-sm-4" id="song" ng-repeat="num in [0,1,2]">
-					<div class="album-art" ng-click="play(suggestedTracks[num].preview_url)" ng-class="suggestedTracks[num].preview_url == currentSong ? 'playing' : ''">
+					<div class="album-art" ng-click="play(suggestedTracks[num].preview_url)">
 	                	<img src="{{suggestedTracks[num].album.images[0].url}}"/>
 					</div>
 					<p class="songdesc">
