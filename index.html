@@ -44,7 +44,7 @@
 			<p ng-show="tracks.length>0" class="help-block">We found a few songs that matched your input. Select the right groove!</p>
 			<p ng-show="tracks.length==0" class="help-block">You're too hipster. Give us something we can actually work with.</p>
 			<div id="matchingsongs" ng-class="track.preview_url == currentSong ? 'playing' : ''" ng-repeat="track in tracks" class="col-sm-4 img">
-		        <div class="album-art" ng-click="play(track.preview.url); getSuggested(track); $parent.hide=true; show()" title='"{{track.name}}" by {{track.artists[0].name}}"'>
+		        <div class="album-art" ng-click="play(track.preview_url); getSuggested(track); $parent.hide=true; show()" title='"{{track.name}}" by {{track.artists[0].name}}"'>
 		            <img src="{{track.album.images[1].url}}"></img>
 		        </div>
 	        </div>
