@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Spotify Template</title>
+	<title>Rock out with your socks out</title>
 	
 	<!-- Include libraries -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
@@ -15,30 +15,67 @@
 	<!-- Read scripts -->
 	<script src="app.js"></script>
 	<link href="app.css" type="text/css" rel="stylesheet"/>	
-	
+	<link rel="shortcut icon" href="img/sock.png">
 </head>
+
 <body>
+	<div class="container jumbotron" id="top">
+			<h1>Find new artists</h1>
+			<p>Put in your current jam and let us inspire you</p>
+	</div>
+
 	<!-- Initiate app -->
 	<div ng-app="myApp" ng-controller="myCtrl">
 		<!-- Form -->
 		<form class="container" name="songForm">
 			<div class="form-group">
-				<label>Spotify search:</label>
-				<input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
+				<label>What is your current jam?</label>
+				<input id="searchinput" name="search" placeholder="Enter your search.." ng-model="track" ng-minlength=1 ng-required="true" class="form-control" required></input>
+				<p class="help-block" ng-show="songForm.search.$error.minlength">We require your jingle</p>
+				<p class="help-block" ng-show="songForm.search.$touched && songForm.seach.$invalid">We need your tune for this to work</p>
 			</div>
 			<div class="form-group">
-				<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
+				<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs(); refresh()" type="submit">Show me something</button>
 			</div>
 		</form>
 		
 		<!-- Results -->
-		<div class="container-fixed">
-			<p ng-show="tracks.length>0" class="help-block">Click to sample</p>
-			<ul>
-				<li ng-repeat="track in tracks" class="" ng-click="play(track.preview_url)" title="{{track.name}}">{{track.name + ', by ' + track.artists[0].name}}</li>
-			</ul>
+		<div class="container" id="songresults" ng-hide="hide">
+			<p ng-show="tracks.length>0" class="help-block">We found a few songs that matched your input. Select the right groove!</p>
+			<p ng-show="tracks.length==0" class="help-block">You're too hipster. Give us something we can actually work with.</p>
+			<div id="matchingsongs" ng-class="track.preview_url == currentSong ? 'playing' : ''" ng-repeat="track in tracks" class="col-sm-4 img">
+		        <div class="album-art" ng-click="getSuggested(track); $parent.hide=true; show()" title='"{{track.name}}" by {{track.artists[0].name}}"'>
+		            <img src="{{track.album.images[1].url}}"></img>
+		        </div>
+	        </div>
 		</div>
-	</div>
-	</div>
+
+		<div id="results" class="container" ng-show="showartist">
+			<div id="songchoice">
+				<h1>PERFECT.</h1>
+				<p>"{{chosenTrack.name}}" by {{chosenArtist.name}}</p>
+				<div id="chosenSong" class="album-art" ng-click="play(chosenTrack.preview.url)" ng-class="chosenTrack.preview_url == current ? 'playing: ''">
+	                <img src="{{chosenTrack.album.images[0].url}}"/>
+				</div>
+			</div>
+
+			<h1>HERE'S WHAT WE FOUND FOR YOU</h1>
+
+			<div id="related">
+				<div class="col-sm-4" id="song" ng-repeat="num in [0,1,2]">
+					<div class="album-art" ng-click="play(suggestedTracks[num].preview_url)" ng-class="suggestedTracks[num].preview_url == currentSong ? 'playing' : ''">
+	                	<img src="{{suggestedTracks[num].album.images[0].url}}"/>
+					</div>
+					<p class="songdesc">
+						<strong>Name: </strong>{{suggestedTracks[num].name}}<br>
+						<strong>By: </strong>{{suggestedArtists[num].name}}<br>
+						<strong>Album: </strong>{{suggestedTracks[num].album.name}}<br>
+						<strong>Hotness: </strong>{{suggestedTracks[num].popularity}}/100
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div><!--Ctrl div-->
 </body>
 </html>

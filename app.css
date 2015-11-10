@@ -1,3 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Bubblegum+Sans);
+
 body {
   padding:10px;
+  background-image: url("img/wood.jpg");
+  color: white;
+  font-family: "Bubblegum Sans";
+}
+
+#top {
+	background: none;
+}
+
+.help-block {
+	color: white;
+}
+
+img {
+	height: 280px;
+	width: 280px;
+	border-radius: 5px;
+}
+
+.album-art {
+	margin: 10px;
+}
+
+.songdesc {
+	margin-left: 10px;
 }
